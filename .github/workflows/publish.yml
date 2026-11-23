@@ -9,27 +9,25 @@ on:
     - cron: '0 8 * * *'
       timezone: America/New_York
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 concurrency:
   group: video-library-publish
   cancel-in-progress: false
 
 jobs:
-  publish:
+  refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: write
+    outputs:
+      commit: ${{ steps.snapshot.outputs.commit }}
+      artifact_name: ${{ steps.snapshot.outputs.artifact }}
+      artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: main
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '24'
       - name: Check playback behavior
@@ -37,6 +35,7 @@ jobs:
       - name: Refresh YouTube catalog
         run: node scripts/refresh.mjs
       - name: Save refreshed catalog
+        id: snapshot
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -45,13 +44,60 @@ jobs:
             git commit -m 'Refresh channel catalog'
             git push
           fi
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "artifact=github-pages-${GITHUB_RUN_ATTEMPT}" >> "$GITHUB_OUTPUT"
+      - name: Upload site package
+        id: upload
+        uses: actions/upload-pages-artifact@v5
         with:
+          name: ${{ steps.snapshot.outputs.artifact }}
           path: site
+
+  publish:
+    needs: refresh
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      actions: read
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.refresh.outputs.commit }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - uses: actions/configure-pages@v6
+      - name: Wait for the site package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ needs.refresh.outputs.artifact_id }}
+          ARTIFACT_NAME: ${{ needs.refresh.outputs.artifact_name }}
+        run: |
+          for attempt in {1..8}; do
+            if found_id=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
+                --method GET -f "name=$ARTIFACT_NAME" \
+                --jq '.artifacts[] | select(.expired == false) | .id') &&
+                [[ -n "$ARTIFACT_ID" && "$found_id" == "$ARTIFACT_ID" ]]; then
+              exit 0
+            fi
+            if [[ "$attempt" -lt 8 ]]; then
+              sleep 5
+            fi
+          done
+          echo "::error::The uploaded Pages artifact did not become visible for this run."
+          exit 1
       - name: Publish
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ needs.refresh.outputs.artifact_name }}
       - name: Verify published catalog
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
