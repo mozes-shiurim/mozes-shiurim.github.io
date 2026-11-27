@@ -10,9 +10,15 @@
   "theme_color": "#f7f5ef",
   "icons": [
     {
-      "src": "./app-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./channel-avatar.jpg",
+      "sizes": "900x900",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./channel-icon.png",
+      "sizes": "128x128",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
