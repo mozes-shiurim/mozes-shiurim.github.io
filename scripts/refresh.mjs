@@ -48,13 +48,23 @@ for (const video of guestVideos) {
   const position = older < 0 ? catalog.videos.findLastIndex(record => record.kind === 'video') + 1 : older;
   catalog.videos.splice(position,0,{...guestRecords.get(video.id),...video});
 }
+// Keep the two versions of this shiur together, including the upload from the podcast playlist.
+const airplaneVideoId = 'axntdkl5HyY';
+const airplaneWithoutSubtitlesId = '21nV636aAds';
+const withoutSubtitles = catalog.videos.find(video => video.id === airplaneWithoutSubtitlesId)
+  ?? catalog.podcast.videos.find(video => video.id === airplaneWithoutSubtitlesId);
+if (withoutSubtitles && catalog.videos.some(video => video.id === airplaneVideoId)) {
+  catalog.videos = catalog.videos.filter(video => video.id !== airplaneWithoutSubtitlesId);
+  const airplanePosition = catalog.videos.findIndex(video => video.id === airplaneVideoId);
+  catalog.videos.splice(airplanePosition + 1, 0, withoutSubtitles);
+}
 for(const list of [catalog.videos,catalog.podcast.videos]){
   if(new Set(list.map(v=>v.id)).size!==list.length)throw Error('Duplicate IDs');
   if(list.some(v=>!/^[-\w]{11}$/.test(v.id)||!v.title))throw Error('Invalid video record');
 }
 const before=stored?JSON.parse(stored).videos:JSON.parse(await fs.readFile(new URL('videos.json',site),'utf8'));
 const beforeIds = new Set(before.map(video => video.id));
-catalog.added += guestVideos.filter(video => !beforeIds.has(video.id)).length;
+catalog.added = catalog.videos.filter(video => !beforeIds.has(video.id)).length;
 const ids=new Set(catalog.videos.map(v=>v.id));
 if(before.some(v=>!ids.has(v.id)))throw Error('Refresh lost an existing video');
 // All source requests and validation finish before any output is replaced.
