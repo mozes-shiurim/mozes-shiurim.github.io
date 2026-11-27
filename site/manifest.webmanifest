@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "Rabbi Yisrael Mozes",
+  "short_name": "Mozes Shiurim",
+  "description": "Watch shiurim, shorts, and podcast episodes from Rabbi Yisrael Mozes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f5ef",
+  "theme_color": "#f7f5ef",
+  "icons": [
+    {
+      "src": "./app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
