@@ -7,7 +7,7 @@
       "title": "וואס איז אהבת ישראל? | הרב ישראל מאזעס שליט״א | אידיש",
       "kind": "video",
       "duration": "45:40",
-      "views": "24 views",
+      "views": "61 views",
       "publishedAt": "2026-11-26T23:30:04+00:00"
     },
     {
@@ -95,7 +95,7 @@
       "title": "במי אני בוחר? | הרב ישראל מוזס שליט\"א | עברית ",
       "kind": "video",
       "duration": "21:20",
-      "views": "805 views",
+      "views": "806 views",
       "publishedAt": "2026-10-13T10:00:09-07:00"
     },
     {
@@ -283,6 +283,13 @@
       "publishedAt": "2026-06-11T11:18:22-07:00"
     },
     {
+      "id": "1x-J1qftkyo",
+      "title": "א געשמאַק אין אַ מצווה ● שיעור ופאַרברענג מיט ר׳ ישראל מוזעס שליט\"א בבית ר׳ אברמי ברייער",
+      "kind": "video",
+      "duration": "2:01:00",
+      "publishedAt": "2026-06-09"
+    },
+    {
       "id": "D0Abdy_ui-I",
       "title": "ווי איז מיין שידוך | הרב ישראל מאזעס שליט״א | אידיש",
       "kind": "video",
@@ -377,6 +384,13 @@
       "duration": "38:53",
       "views": "827 views",
       "publishedAt": "2026-02-26T08:55:54-08:00"
+    },
+    {
+      "id": "z6CQ2Rw7Av4",
+      "title": "#25: Reb Yisroel Moses - אידיש: ר׳ ישראל מאזעס",
+      "kind": "video",
+      "duration": "2:02:28",
+      "publishedAt": "2026-02-26"
     },
     {
       "id": "XRkykSPxZms",
@@ -499,11 +513,18 @@
       "publishedAt": "2025-11-13T07:32:52-08:00"
     },
     {
+      "id": "SzXoalX7p48",
+      "title": "שיעור בעניין שמחת החיים ע\"י הרה\"צ רבי ישראל מוזס, אב\"ד מושכינו שליט\"א, יום ג', פרשת לך לך,",
+      "kind": "video",
+      "duration": "1:19:31",
+      "publishedAt": "2025-10-29"
+    },
+    {
       "id": "DIDljGJ8j54",
       "title": "גיב צדקה וועסטו זוכה זיין צו אמת | אמונה - אות סב'",
       "kind": "short",
       "duration": "",
-      "views": "266 views",
+      "views": "270 views",
       "publishedAt": "2026-11-25T18:30:01+00:00"
     },
     {
@@ -519,7 +540,7 @@
       "title": "דורך אמת ווערט די גאנצע וועלט אפגעהיטן | אמונה - אות ס'",
       "kind": "short",
       "duration": "",
-      "views": "369 views",
+      "views": "370 views",
       "publishedAt": "2026-11-23T17:30:24+00:00"
     },
     {
@@ -527,7 +548,7 @@
       "title": "די תיקון פאר די מויל איז געבן צדקה | אמונה - אות נט'",
       "kind": "short",
       "duration": "",
-      "views": "203 views",
+      "views": "205 views",
       "publishedAt": "2026-11-23T05:30:09+00:00"
     },
     {
@@ -591,7 +612,7 @@
       "title": "when will you be alive?",
       "kind": "short",
       "duration": "",
-      "views": "827 views",
+      "views": "828 views",
       "publishedAt": "2026-11-17T01:07:19+00:00"
     },
     {
@@ -807,7 +828,7 @@
       "title": "א שטריימל האט נישט מיט חסידות  | הרב ישראל מאזעס שליט\"א | אידיש",
       "kind": "short",
       "duration": "",
-      "views": "917 views",
+      "views": "919 views",
       "publishedAt": "2026-10-14T11:30:16-07:00"
     },
     {
@@ -2676,7 +2697,7 @@
         "title": "וואס איז אהבת ישראל? | הרב ישראל מאזעס שליט״א | אידיש",
         "kind": "video",
         "duration": "45:40",
-        "views": "24 views",
+        "views": "61 views",
         "publishedAt": "2026-11-26T23:30:04+00:00"
       },
       {
@@ -2740,7 +2761,7 @@
         "title": "במי אני בוחר? | הרב ישראל מוזס שליט\"א | עברית ",
         "kind": "video",
         "duration": "21:20",
-        "views": "805 views",
+        "views": "806 views",
         "publishedAt": "2026-10-13T10:00:09-07:00"
       },
       {
@@ -3145,6 +3166,6 @@
       }
     ]
   },
-  "checkedAt": "2026-11-27T02:06:50.839Z",
-  "added": 0
+  "checkedAt": "2026-11-27T04:44:21.006Z",
+  "added": 3
 }
